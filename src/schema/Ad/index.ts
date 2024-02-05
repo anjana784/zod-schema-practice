@@ -82,14 +82,14 @@ export const AdSchema = z
     ]),
   })
   .strict()
-  .superRefine((data, ctx: z.RefinementCtx) => {
+  .superRefine((data, ctx: z.RefinementCtx): void => {
     /**
      * validate sub categories against to each main category
      */
     // If mainCategory is vehicles, subCategory should be vehicle sub categories
     if (data.mainCategory === "vehicle") {
       if (vehiclesSubCategories.includes(data.subCategory)) {
-        return true;
+        return;
       } else {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
@@ -97,14 +97,14 @@ export const AdSchema = z
           path: ["subCategory"],
           fatal: true,
         });
-        return z.never();
+        return;
       }
     }
 
     // If mainCategory is property, subCategory should be property sub categories
     if (data.mainCategory === "property") {
       if (propertySubCategories.includes(data.subCategory)) {
-        return true;
+        return;
       } else {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
@@ -112,7 +112,7 @@ export const AdSchema = z
           path: ["subCategory"],
           fatal: true,
         });
-        return z.never();
+        return;
       }
     }
     /**---------------------------------------------------------------------------------------------**/

@@ -21,7 +21,7 @@ const car: VehicleType = {
 
 const house: PropertyType = {
   mainCategory: "property",
-  subCategory: "house",
+  subCategory: "apartment",
   title: "A house with 3 bedrooms",
   description: "A breif description about the house",
   location: {
